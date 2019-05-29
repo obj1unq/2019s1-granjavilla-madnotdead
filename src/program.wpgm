@@ -1,0 +1,27 @@
+import wollok.game.*
+import objects.*
+
+program abc {
+
+//	CONFIG	
+	game.title("GranjaVille")
+	game.height(10)
+	game.width(10)
+	game.ground("ground.png")
+	
+	//player setup
+	var player = new Hector(position = game.at( game.height() / 2, game.width() / 2))
+	game.addVisual(player)
+		
+	//keyboard events
+	keyboard.m().onPressDo { game.addVisual(new Corn(position = player.position()))}
+	keyboard.t().onPressDo { game.addVisual(new Wheat(position = player.position()))}
+	keyboard.o().onPressDo { game.addVisual(new Tomaco(position = player.position()))}
+	
+	keyboard.up().onPressDo { player.move(player.position().up(1)) }
+	keyboard.down().onPressDo { player.move(player.position().down(1)) }
+	keyboard.left().onPressDo { player.move(player.position().left(1)) }
+	keyboard.right().onPressDo { player.move(player.position().right(1)) }
+	
+	game.start()	
+}
